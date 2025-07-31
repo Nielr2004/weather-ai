@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
-import { Fredoka } from "next/font/google"; 
+import { Poppins } from "next/font/google";
 import "./globals.css";
 
-const fredoka = Fredoka({ subsets: ["latin"], weight: "400" });
+const poppins = Poppins({ 
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"] 
+});
 
 export const metadata: Metadata = {
   title: "Weather Fun",
@@ -15,9 +18,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // ## THE FIX: Add suppressHydrationWarning to the <html> tag ##
+    // suppressHydrationWarning is important for theme toggle to work without errors
     <html lang="en" suppressHydrationWarning>
-      <body className={fredoka.className}>{children}</body>
+      <body className={poppins.className} suppressHydrationWarning>
+        {children}
+      </body>
     </html>
   );
 }

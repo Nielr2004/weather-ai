@@ -1,8 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
 import { Search, Loader } from 'lucide-react';
 
 interface Suggestion {
@@ -58,7 +56,6 @@ export function SearchBar({ onSearch, loading }: SearchBarProps) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // ## FIX 2: Check the query before calling onSearch ##
     if (query.trim()) {
       onSearch(query);
     }
@@ -68,17 +65,23 @@ export function SearchBar({ onSearch, loading }: SearchBarProps) {
   return (
     <div className="relative w-full">
       <form onSubmit={handleSubmit} className="flex w-full items-center space-x-2">
-        <Input
+        {/* Replaced <Input> with a styled <input> */}
+        <input
           type="text"
           placeholder="Search for a city..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           disabled={loading}
-          className="bg-black/30 backdrop-blur-sm border-white/30 text-white placeholder:text-gray-300 text-lg h-12"
+          className="w-full h-12 px-4 rounded-lg bg-black/30 backdrop-blur-sm border border-white/30 text-white placeholder:text-gray-300 text-lg focus:outline-none focus:ring-2 focus:ring-white/50"
         />
-        <Button type="submit" disabled={loading || isTyping} size="lg" className="h-12">
+        {/* Replaced <Button> with a styled <button> */}
+        <button
+          type="submit"
+          disabled={loading || isTyping}
+          className="h-12 w-12 flex-shrink-0 flex items-center justify-center rounded-lg bg-white/20 hover:bg-white/30 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
           {loading ? <Loader className="animate-spin" /> : <Search />}
-        </Button>
+        </button>
       </form>
       {suggestions.length > 0 && (
         <ul className="absolute top-full mt-2 w-full bg-black/50 backdrop-blur-lg rounded-lg border border-white/20 z-10">

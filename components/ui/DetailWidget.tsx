@@ -1,4 +1,3 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ReactNode } from "react";
 
 interface DetailWidgetProps {
@@ -10,18 +9,23 @@ interface DetailWidgetProps {
 }
 
 export function DetailWidget(props: DetailWidgetProps) {
+  // The root div now replaces the <Card> component
   return (
-    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white flex-grow">
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-white/80">{props.title}</CardTitle>
-            <div className="text-yellow-300">{props.icon}</div>
-        </CardHeader>
-        <CardContent>
-            <div className="text-2xl font-bold">
-                {props.value} <span className="text-xl font-normal text-white/70">{props.unit}</span>
-            </div>
-            {props.children}
-        </CardContent>
-    </Card>
+    <div className="bg-white/10 backdrop-blur-md border-white/20 text-white flex-grow p-4 rounded-2xl flex flex-col">
+      {/* This div replaces <CardHeader> */}
+      <div className="flex flex-row items-center justify-between pb-2">
+        {/* This p tag replaces <CardTitle> */}
+        <p className="text-sm font-medium text-white/80">{props.title}</p>
+        <div className="text-yellow-300">{props.icon}</div>
+      </div>
+      
+      {/* This div replaces <CardContent> */}
+      <div>
+        <div className="text-2xl font-bold">
+            {props.value} <span className="text-xl font-normal text-white/70">{props.unit}</span>
+        </div>
+        {props.children}
+      </div>
+    </div>
   )
 }
