@@ -39,10 +39,13 @@ export async function GET(request: Request) {
             mintemp_c: day.day.mintemp_c,
             icon_url: `https:${day.day.condition.icon}`
         })),
-        hourly: data.forecast.forecastday[0].hour.slice(new Date().getHours()).slice(0, 8).map((hour: any) => ({
-          time: hour.time.substring(11, 16),
-          temp_c: hour.temp_c,
-          icon_url: `https:${hour.condition.icon}`
+        hourly: data.forecast.forecastday[0].hour
+          .slice(new Date().getHours())
+          .slice(0, 8)
+          .map((hour: any) => ({
+            time: hour.time.substring(11, 16),
+            temp_c: hour.temp_c,
+            icon_url: `https:${hour.condition.icon}`
         }))
       }
     };

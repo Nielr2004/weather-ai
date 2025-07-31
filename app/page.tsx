@@ -6,13 +6,13 @@ import { CurrentWeatherDisplay } from '@/components/ui/CurrentWeatherDisplay';
 import { InfoCard } from '@/components/ui/InfoCard';
 import { HourlyPill } from '@/components/ui/HourlyPill';
 import { DailyForecastRow } from '@/components/ui/DailyForecastRow';
-import { WeatherDetailsCard } from '@/components/ui/WeatherDetailsCard';
+import { WeatherDetailsGrid } from '@/components/ui/WeatherDetailsGrid';
 
 interface WeatherData {
   location: { name: string; country: string; };
-  current: { 
-    temp_c: number; 
-    condition_text: string; 
+  current: {
+    temp_c: number;
+    condition_text: string;
     feelslike_c: number;
     wind_kph: number;
     humidity: number;
@@ -52,8 +52,7 @@ export default function Home() {
   };
 
   return (
-    <main className="relative w-screen h-screen overflow-y-auto p-4 sm:p-6 font-sans">
-      {/* ## NEW: Simple div for the Aurora Background ## */}
+    <main className="relative w-screen h-screen overflow-y-auto p-4 sm:p-6">
       <div className="aurora-background" />
       
       <div className="w-full max-w-lg mx-auto space-y-6">
@@ -63,7 +62,7 @@ export default function Home() {
         {error && <p className="text-red-300 bg-red-900/50 p-4 rounded-lg text-center">{error}</p>}
         
         {weatherData && (
-          <div className="space-y-6 animate-float-in">
+          <div className="space-y-6 animate-in fade-in duration-700">
             <CurrentWeatherDisplay data={{
               location: weatherData.location.name,
               temp: weatherData.current.temp_c,
@@ -73,7 +72,7 @@ export default function Home() {
             }} />
             
             <InfoCard title="Today's Details">
-                <WeatherDetailsCard data={{
+                <WeatherDetailsGrid data={{
                     feelsLike: weatherData.current.feelslike_c,
                     windSpeed: weatherData.current.wind_kph,
                     humidity: weatherData.current.humidity,

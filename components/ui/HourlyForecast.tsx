@@ -1,15 +1,19 @@
-interface HourlyForecastProps {
-  time: string;
-  temp: number;
+interface DailyForecastRowProps {
+  day: string;
   icon: string;
+  high: number;
+  low: number;
 }
 
-export function HourlyForecast({ time, temp, icon }: HourlyForecastProps) {
+export function DailyForecastRow({ day, icon, high, low }: DailyForecastRowProps) {
   return (
-    <div className="flex flex-col items-center justify-center gap-2 p-4 bg-white/10 rounded-lg backdrop-blur-md border border-white/20 flex-shrink-0 w-24">
-      <p className="text-sm text-white/80">{time}</p>
-      <img src={icon} alt="weather icon" width={40} height={40} />
-      <p className="text-lg font-bold text-white">{Math.round(temp)}°</p>
+    <div className="flex items-center justify-between text-white py-2 border-b border-white/10 last:border-b-0">
+      <p className="w-1/3 font-medium">{day}</p>
+      <img src={icon} alt="weather icon" width={32} height={32} />
+      <div className="w-1/3 flex justify-end gap-4">
+        <p className="font-bold">{Math.round(high)}°</p>
+        <p className="text-white/60">{Math.round(low)}°</p>
+      </div>
     </div>
   );
 }
